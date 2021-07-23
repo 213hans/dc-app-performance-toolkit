@@ -1,3 +1,4 @@
+from selenium.webdriver.common.by import By
 from selenium_ui.base_page import BasePage
 
 from selenium_ui.confluence.pages.selectors import UrlManager, LoginPageLocators, AllUpdatesLocators, PopupLocators,\
@@ -103,6 +104,10 @@ class Editor(BasePage):
         self.wait_until_clickable(EditorLocators.publish_button)
 
     def wait_for_page_loaded(self):
+
+        self.wait_until_any_ec_presented(selector_names=[(By.CLASS_NAME, "collaborative-editor-load-failure"),
+                                                         (By.ID, "inviteToEditLink")])
+        self.driver.refresh()
         self.wait_for_editor_open()
         self.wait_until_clickable(EditorLocators.publish_button)
 
