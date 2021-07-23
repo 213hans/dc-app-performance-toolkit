@@ -1,3 +1,4 @@
+# Adaption from oleksandr Metelytsia, Hans Pesata 02.07.2021
 from selenium.webdriver.common.by import By
 from selenium_ui.base_page import BasePage
 
@@ -103,13 +104,18 @@ class Editor(BasePage):
     def wait_for_create_page_open(self):
         self.wait_until_clickable(EditorLocators.publish_button)
 
-    def wait_for_page_loaded(self):
+#    def wait_for_page_loaded(self):
+#        self.wait_for_editor_open()
+#        self.wait_until_clickable(EditorLocators.publish_button)
 
+# Adaptions from oleksandr Metelytsia, Hans Pesata 02.07.2021
+    def wait_for_page_loaded(self):
         self.wait_until_any_ec_presented(selector_names=[(By.CLASS_NAME, "collaborative-editor-load-failure"),
                                                          (By.ID, "inviteToEditLink")])
         self.driver.refresh()
         self.wait_for_editor_open()
         self.wait_until_clickable(EditorLocators.publish_button)
+
 
     def write_title(self):
         title_field = self.wait_until_visible(EditorLocators.title_field)
